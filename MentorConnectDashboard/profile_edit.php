@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <i class="fas fa-user-edit mr-3"></i>
                         Edit Profile
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                    <a href="contact_admin.php" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
                         <i class="fas fa-envelope mr-3"></i>
                         Contact Admin
                     </a>
