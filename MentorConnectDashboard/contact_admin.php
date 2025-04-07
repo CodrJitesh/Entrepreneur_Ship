@@ -47,7 +47,7 @@ $stmt->close();
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 dark:bg-dark-100 dark:text-white">
-    <div class="flex">
+    <div class="flex h-screen">
         <!-- Sidebar -->
         <div class="w-64 bg-white dark:bg-dark-200 shadow-lg">
             <div class="p-4">
