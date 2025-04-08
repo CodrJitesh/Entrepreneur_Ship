@@ -55,7 +55,7 @@ $stmt->close();
             </div>
             <nav class="mt-6">
                 <div class="px-4 space-y-2">
-                    <a href="dashboard.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
+                    <a href="dashboard.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 bg-orange-100 dark:bg-orange-900 rounded-lg">
                         <i class="fas fa-home mr-3"></i>
                         Home
                     </a>
@@ -63,11 +63,19 @@ $stmt->close();
                         <i class="fas fa-users mr-3"></i>
                         Mentors
                     </a>
+                    <a href="courses.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
+                        <i class="fas fa-book mr-3"></i>
+                        Courses
+                    </a>
+                    <a href="my_courses.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
+                        <i class="fas fa-graduation-cap mr-3"></i>
+                        My Courses
+                    </a>
                     <a href="profile_edit.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
                         <i class="fas fa-user-edit mr-3"></i>
                         Edit Profile
                     </a>
-                    <a href="contact_admin.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 bg-orange-100 dark:bg-orange-900 rounded-lg">
+                    <a href="contact_admin.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
                         <i class="fas fa-envelope mr-3"></i>
                         Contact Admin
                     </a>
