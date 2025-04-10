@@ -65,46 +65,7 @@ $stmt->close();
 </head>
 <body class="bg-gray-100 dark:bg-dark-100 dark:text-white">
     <div class="flex h-screen">
-        <!-- Sidebar -->
-        <div class="w-64 bg-white dark:bg-dark-200 shadow-lg">
-            <div class="p-4">
-                <h1 class="text-2xl font-bold text-orange-600">MentorConnect</h1>
-            </div>
-            <nav class="mt-6">
-                <div class="px-4 space-y-2">
-                    <a href="dashboard.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 bg-orange-100 dark:bg-orange-900 rounded-lg">
-                        <i class="fas fa-home mr-3"></i>
-                        Home
-                    </a>
-                    <a href="mentor_directory.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                        <i class="fas fa-users mr-3"></i>
-                        Mentors
-                    </a>
-                    <a href="courses.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                        <i class="fas fa-book mr-3"></i>
-                        Courses
-                    </a>
-                    <a href="my_courses.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                        <i class="fas fa-graduation-cap mr-3"></i>
-                        My Courses
-                    </a>
-                    <a href="profile_edit.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                        <i class="fas fa-user-edit mr-3"></i>
-                        Edit Profile
-                    </a>
-                    <a href="contact_admin.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                        <i class="fas fa-envelope mr-3"></i>
-                        Contact Admin
-                    </a>
-                </div>
-            </nav>
-            <div class="absolute bottom-0 w-64 p-4">
-                <a href="logout.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                    <i class="fas fa-sign-out-alt mr-3"></i>
-                    Sign Out
-                </a>
-            </div>
-        </div>
+        <?php include 'components/navbar.php'; ?>
 
         <!-- Main Content -->
         <div class="flex-1 overflow-auto">
@@ -133,55 +94,30 @@ $stmt->close();
                     </div>
 
                     <!-- My Courses Section -->
-                    <div class="mb-8">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-xl font-semibold text-gray-800 dark:text-white">My Courses</h2>
-                            <a href="my_courses.php" class="text-orange-600 hover:text-orange-700">View All</a>
-                        </div>
+                    <div class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-6 mb-8">
+                        <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">My Courses</h2>
                         <?php if (empty($enrolledCourses)): ?>
-                            <div class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-6 text-center">
-                                <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-graduation-cap text-2xl text-orange-600"></i>
-                                </div>
-                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No courses enrolled yet</h3>
-                                <p class="text-gray-500 dark:text-gray-400 mb-4">Browse our available courses and start learning today!</p>
-                                <a href="courses.php" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
-                                    <i class="fas fa-book mr-2"></i>
-                                    Browse Courses
-                                </a>
-                            </div>
+                            <p class="text-gray-600 dark:text-gray-400">You haven't enrolled in any courses yet.</p>
+                            <a href="courses.php" class="mt-4 inline-block bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700">
+                                Browse Courses
+                            </a>
                         <?php else: ?>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 <?php foreach ($enrolledCourses as $course): ?>
-                                    <div class="bg-white dark:bg-dark-200 rounded-lg shadow-md overflow-hidden">
-                                        <div class="p-6">
-                                            <div class="flex items-center mb-4">
-                                                <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
-                                                    <i class="fas fa-book text-orange-600"></i>
-                                                </div>
-                                                <div class="ml-4">
-                                                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                                                        <?php echo htmlspecialchars($course['title']); ?>
-                                                    </h3>
-                                                    <p class="text-sm text-orange-600">
-                                                        <?php echo htmlspecialchars($course['mentor_name']); ?>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="flex flex-wrap gap-2 mb-4">
-                                                <span class="inline-block bg-gray-100 dark:bg-dark-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-300">
-                                                    <?php echo htmlspecialchars($course['duration']); ?>
-                                                </span>
-                                                <span class="inline-block bg-gray-100 dark:bg-dark-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-300">
-                                                    <?php echo htmlspecialchars($course['level']); ?>
-                                                </span>
-                                            </div>
-                                            <div class="flex justify-end">
-                                                <a href="course_details.php?id=<?php echo $course['id']; ?>"
-                                                   class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
-                                                    View Course
-                                                </a>
-                                            </div>
+                                    <div class="bg-white dark:bg-dark-300 rounded-lg shadow-md p-6">
+                                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                                            <?php echo htmlspecialchars($course['title']); ?>
+                                        </h3>
+                                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                                            <?php echo htmlspecialchars($course['description']); ?>
+                                        </p>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">
+                                                Mentor: <?php echo htmlspecialchars($course['mentor_name']); ?>
+                                            </span>
+                                            <a href="course_details.php?id=<?php echo $course['id']; ?>" class="text-orange-600 hover:text-orange-700">
+                                                View Details
+                                            </a>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
@@ -190,7 +126,7 @@ $stmt->close();
                     </div>
 
                     <!-- Quick Actions -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <a href="mentor_directory.php" class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
                             <div class="flex items-center">
                                 <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
@@ -198,7 +134,7 @@ $stmt->close();
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Find a Mentor</h3>
-                                    <p class="text-gray-600 dark:text-gray-400">Browse our directory of experienced mentors</p>
+                                    <p class="text-gray-600 dark:text-gray-400">Connect with experienced mentors</p>
                                 </div>
                             </div>
                         </a>
@@ -209,7 +145,7 @@ $stmt->close();
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Browse Courses</h3>
-                                    <p class="text-gray-600 dark:text-gray-400">Explore our available courses</p>
+                                    <p class="text-gray-600 dark:text-gray-400">Explore available courses</p>
                                 </div>
                             </div>
                         </a>
@@ -233,27 +169,21 @@ $stmt->close();
     <script>
         // Theme toggle functionality
         const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
+        const themeIcon = themeToggle.querySelector('i');
         
-        // Check for saved theme preference or use system preference
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-            themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
-        } else {
-            html.classList.remove('dark');
-            themeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
         }
         
         themeToggle.addEventListener('click', () => {
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.theme = 'light';
-                themeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
-            } else {
-                html.classList.add('dark');
-                localStorage.theme = 'dark';
-                themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
-            }
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeIcon.classList.toggle('fa-moon');
+            themeIcon.classList.toggle('fa-sun');
         });
     </script>
 </body>

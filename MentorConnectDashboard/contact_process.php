@@ -8,6 +8,9 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+// Set current page for navbar highlighting
+$current_page = 'contact_admin.php';
+
 // Get user profile
 $stmt = $conn->prepare("
     SELECT p.full_name, u.email

@@ -8,6 +8,9 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+// Set current page for navbar highlighting
+$current_page = 'course_details.php';
+
 // Get course ID from URL
 $course_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
@@ -84,41 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$enrollment) {
 <body class="bg-gray-100 dark:bg-dark-100 dark:text-white">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="w-64 bg-white dark:bg-dark-200 shadow-lg">
-            <div class="p-4">
-                <h1 class="text-2xl font-bold text-orange-600">MentorConnect</h1>
-            </div>
-            <nav class="mt-6">
-                <div class="px-4 space-y-2">
-                    <a href="dashboard.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                        <i class="fas fa-home mr-3"></i>
-                        Home
-                    </a>
-                    <a href="mentor_directory.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                        <i class="fas fa-users mr-3"></i>
-                        Mentors
-                    </a>
-                    <a href="courses.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 bg-orange-100 dark:bg-orange-900 rounded-lg">
-                        <i class="fas fa-book mr-3"></i>
-                        Courses
-                    </a>
-                    <a href="profile_edit.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                        <i class="fas fa-user-edit mr-3"></i>
-                        Edit Profile
-                    </a>
-                    <a href="contact_admin.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                        <i class="fas fa-envelope mr-3"></i>
-                        Contact Admin
-                    </a>
-                </div>
-            </nav>
-            <div class="absolute bottom-0 w-64 p-4">
-                <a href="logout.php" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                    <i class="fas fa-sign-out-alt mr-3"></i>
-                    Sign Out
-                </a>
-            </div>
-        </div>
+        <?php include 'components/navbar.php'; ?>
 
         <!-- Main Content -->
         <div class="flex-1 overflow-auto">
