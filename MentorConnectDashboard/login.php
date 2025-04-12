@@ -2,7 +2,7 @@
 session_start();
 require_once 'backend/db_connect.php';
 
-// Check if user is already logged in
+// Redirect if already logged in
 if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
     exit();
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
             if (password_verify($password, $user['password'])) {
@@ -64,8 +64,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 dark:bg-dark-100 dark:text-white min-h-screen flex items-center justify-center">
-    <div class="max-w-md w-full mx-4">
+<body class="bg-gray-100 dark:bg-dark-100 dark:text-white min-h-screen flex items-center justify-center relative overflow-hidden">
+
+    <!-- 🔽 Video Background -->
+    <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0">
+        <source src="includes/backdrop.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- 🔽 Optional Dark Overlay -->
+    <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-0"></div>
+
+    <!-- 🔼 Login Container -->
+    <div class="max-w-md w-full mx-4 z-10 relative">
         <div class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-8">
             <div class="text-center mb-8">
                 <h1 class="text-3xl font-bold text-orange-600">MentorConnect</h1>
@@ -79,18 +90,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <form method="POST" class="space-y-6">
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-                    <input type="email" id="email" name="email" required
-                           class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white"
-                           placeholder="Enter your email">
-                </div>
-
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
-                    <input type="password" id="password" name="password" required
-                           class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white"
-                           placeholder="Enter your password">
+                <div class="space-y-4">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            placeholder="Enter your email"
+                            class="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2"
+                        />
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            placeholder="Enter your password"
+                            class="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2"
+                        />
+                    </div>
                 </div>
 
                 <div>
@@ -112,11 +134,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
+    <!-- 🌗 Theme toggle -->
     <script>
-        // Theme toggle functionality
         const html = document.documentElement;
-        
-        // Check for saved theme preference or use system preference
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             html.classList.add('dark');
         } else {
@@ -124,4 +144,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 </body>
-</html> 
+</html>

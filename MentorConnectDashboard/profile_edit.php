@@ -102,43 +102,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php endif; ?>
 
                         <form method="POST" class="space-y-6">
-                            <div>
-                                <label for="full_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
-                                <input type="text" id="full_name" name="full_name" required
-                                       class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white"
-                                       value="<?php echo htmlspecialchars($profile['full_name'] ?? ''); ?>">
-                            </div>
-
-                            <div>
-                                <label for="headline" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Headline</label>
-                                <input type="text" id="headline" name="headline"
-                                       class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white"
-                                       value="<?php echo htmlspecialchars($profile['headline'] ?? ''); ?>"
-                                       placeholder="e.g., Software Engineer, Entrepreneur">
-                            </div>
-
-                            <div>
-                                <label for="bio" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Bio</label>
-                                <textarea id="bio" name="bio" rows="4"
-                                          class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white"
-                                          placeholder="Tell us about yourself..."><?php echo htmlspecialchars($profile['bio'] ?? ''); ?></textarea>
-                            </div>
-
-                            <div>
-                                <label for="industry" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Industry</label>
-                                <input type="text" id="industry" name="industry"
-                                       class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white"
-                                       value="<?php echo htmlspecialchars($profile['industry'] ?? ''); ?>"
-                                       placeholder="e.g., Technology, Healthcare, Finance">
-                            </div>
-
-                            <div>
-                                <label for="skills_or_needs" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                    <?php echo $profile['user_type'] === 'mentor' ? 'Skills' : 'Areas of Interest'; ?>
-                                </label>
-                                <textarea id="skills_or_needs" name="skills_or_needs" rows="4"
-                                          class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white"
-                                          placeholder="<?php echo $profile['user_type'] === 'mentor' ? 'List your skills and expertise...' : 'What areas would you like to learn about?'; ?>"><?php echo htmlspecialchars($profile['skills_or_needs'] ?? ''); ?></textarea>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="full_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
+                                    <input
+                                        type="text"
+                                        id="full_name"
+                                        name="full_name"
+                                        required
+                                        placeholder="Enter your full name"
+                                        class="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2"
+                                    />
+                                </div>
+                                <div>
+                                    <label for="headline" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Headline</label>
+                                    <input
+                                        type="text"
+                                        id="headline"
+                                        name="headline"
+                                        placeholder="Enter your headline"
+                                        class="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2"
+                                    />
+                                </div>
+                                <div>
+                                    <label for="bio" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Bio</label>
+                                    <textarea id="bio" name="bio" rows="4"
+                                              class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white"
+                                              placeholder="Tell us about yourself..."><?php echo htmlspecialchars($profile['bio'] ?? ''); ?></textarea>
+                                </div>
+                                <div>
+                                    <label for="industry" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Industry</label>
+                                    <input
+                                        type="text"
+                                        id="industry"
+                                        name="industry"
+                                        placeholder="Enter your industry"
+                                        class="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2"
+                                    />
+                                </div>
+                                <div>
+                                    <label for="skills_or_needs" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        <?php echo $profile['user_type'] === 'mentor' ? 'Skills' : 'Areas of Interest'; ?>
+                                    </label>
+                                    <textarea id="skills_or_needs" name="skills_or_needs" rows="4"
+                                              class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white"
+                                              placeholder="<?php echo $profile['user_type'] === 'mentor' ? 'List your skills and expertise...' : 'What areas would you like to learn about?'; ?>"><?php echo htmlspecialchars($profile['skills_or_needs'] ?? ''); ?></textarea>
+                                </div>
                             </div>
 
                             <div class="flex justify-end">
