@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div>
                                     <label for="bio" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Bio</label>
                                     <textarea id="bio" name="bio" rows="4"
-                                              class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white"
+                                              class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white p-2"
                                               placeholder="Tell us about yourself..."><?php echo htmlspecialchars($profile['bio'] ?? ''); ?></textarea>
                                 </div>
                                 <div>
@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <?php echo $profile['user_type'] === 'mentor' ? 'Skills' : 'Areas of Interest'; ?>
                                     </label>
                                     <textarea id="skills_or_needs" name="skills_or_needs" rows="4"
-                                              class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white"
+                                              class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-dark-300 dark:text-white p-2"
                                               placeholder="<?php echo $profile['user_type'] === 'mentor' ? 'List your skills and expertise...' : 'What areas would you like to learn about?'; ?>"><?php echo htmlspecialchars($profile['skills_or_needs'] ?? ''); ?></textarea>
                                 </div>
                             </div>

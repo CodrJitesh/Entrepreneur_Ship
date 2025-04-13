@@ -82,7 +82,7 @@ $stmt->close();
                     <div class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-6 mb-8">
                         <div class="flex items-center">
                             <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
-                                <span class="text-2xl font-bold text-orange-600">
+                                <span class="text-2xl font-bold text-orange-600 dark:text-white">
                                     <?php echo strtoupper(substr($profile['full_name'], 0, 1)); ?>
                                 </span>
                             </div>
@@ -130,7 +130,7 @@ $stmt->close();
                         <a href="mentor_directory.php" class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
                             <div class="flex items-center">
                                 <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-users text-orange-600"></i>
+                                    <i class="fas fa-users text-orange-600 dark:text-white"></i>
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Find a Mentor</h3>
@@ -141,7 +141,7 @@ $stmt->close();
                         <a href="courses.php" class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
                             <div class="flex items-center">
                                 <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-book text-orange-600"></i>
+                                    <i class="fas fa-book text-orange-600 dark:text-white"></i>
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Browse Courses</h3>
@@ -152,7 +152,7 @@ $stmt->close();
                         <a href="profile_edit.php" class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
                             <div class="flex items-center">
                                 <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-user-edit text-orange-600"></i>
+                                    <i class="fas fa-user-edit text-orange-600 dark:text-white"></i>
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Update Profile</h3>
