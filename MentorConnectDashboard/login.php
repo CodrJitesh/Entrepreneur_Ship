@@ -63,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="includes/animations.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 dark:bg-dark-100 dark:text-white min-h-screen flex items-center justify-center relative overflow-hidden">
 
@@ -77,21 +78,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- 🔼 Login Container -->
     <div class="max-w-md w-full mx-4 z-10 relative">
-        <div class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-8">
-            <div class="text-center mb-8">
+        <div class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-8 card-hover animate-scale-in">
+            <div class="text-center mb-8 animate-fade-in">
                 <h1 class="text-3xl font-bold text-orange-600">MentorConnect</h1>
-                <p class="text-gray-600 dark:text-gray-400 mt-2">Sign in to your account</p>
+                <p class="text-gray-600 dark:text-gray-400 mt-2">Welcome back</p>
             </div>
 
             <?php if ($error): ?>
-                <div class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-200 px-4 py-3 rounded relative mb-4" role="alert">
+                <div class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-200 px-4 py-3 rounded relative mb-4 animate-slide-in-right" role="alert">
                     <span class="block sm:inline"><?php echo htmlspecialchars($error); ?></span>
                 </div>
             <?php endif; ?>
 
             <form method="POST" class="space-y-6">
                 <div class="space-y-4">
-                    <div>
+                    <div class="animate-fade-in delay-100">
                         <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
                         <input
                             type="email"
@@ -99,10 +100,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             name="email"
                             required
                             placeholder="Enter your email"
-                            class="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2"
+                            class="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2 input-focus"
                         />
                     </div>
-                    <div>
+                    <div class="animate-fade-in delay-200">
                         <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
                         <input
                             type="password"
@@ -110,23 +111,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             name="password"
                             required
                             placeholder="Enter your password"
-                            class="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2"
+                            class="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2 input-focus"
                         />
                     </div>
                 </div>
 
-                <div>
+                <div class="animate-fade-in delay-300">
                     <button type="submit"
-                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
-                        Sign In
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 btn-hover">
+                        Sign in
                     </button>
                 </div>
             </form>
 
-            <div class="mt-6 text-center">
+            <div class="mt-6 text-center animate-fade-in delay-400">
                 <p class="text-sm text-gray-600 dark:text-gray-400">
                     Don't have an account? 
-                    <a href="register.php" class="font-medium text-orange-600 hover:text-orange-500">
+                    <a href="register.php" class="font-medium text-orange-600 hover:text-orange-500 nav-link">
                         Sign up
                     </a>
                 </p>

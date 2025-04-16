@@ -45,78 +45,89 @@ $stmt->close();
         }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="includes/animations.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 dark:bg-dark-100 dark:text-white">
+<body class="bg-gray-100 dark:bg-dark-100 dark:text-white min-h-screen">
     <div class="flex h-screen">
-        <!-- Sidebar -->
         <?php include 'components/navbar.php'; ?>
 
         <!-- Main Content -->
-        <div class="flex-1 p-8">
-            <div class="max-w-2xl mx-auto">
-                <div class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-8">
-                    <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">Contact Admin</h1>
+        <div class="flex-1 overflow-auto">
+            <!-- Theme Toggle -->
+            <div class="flex justify-end mb-4">
+                <button id="theme-toggle" class="p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
 
-                    <?php if ($error): ?>
-                        <div class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-200 px-4 py-3 rounded relative mb-4" role="alert">
-                            <span class="block sm:inline"><?php echo htmlspecialchars($error); ?></span>
-                        </div>
-                    <?php endif; ?>
+            <div class="p-8 animate-fade-in">
+                <div class="max-w-4xl mx-auto">
+                    <!-- Header -->
+                    <div class="mb-8 animate-slide-in">
+                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Contact Admin</h1>
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">Have a question or concern? Send us a message.</p>
+                    </div>
 
-                    <?php if ($success): ?>
-                        <div class="bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-700 text-green-700 dark:text-green-200 px-4 py-3 rounded relative mb-4" role="alert">
-                            <span class="block sm:inline"><?php echo htmlspecialchars($success); ?></span>
-                        </div>
-                    <?php endif; ?>
-
-                    <form method="POST" action="contact_process.php" class="space-y-6">
-                        <div class="space-y-4">
+                    <!-- Contact Form -->
+                    <div class="bg-white dark:bg-dark-200 rounded-xl shadow-md p-8 card-hover animate-scale-in">
+                        <form action="backend/contact_admin.php" method="POST" class="space-y-6">
                             <div>
-                                <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Subject</label>
+                                <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
                                 <input
                                     type="text"
                                     id="subject"
                                     name="subject"
                                     required
-                                    placeholder="Enter subject"
-                                    class="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2"
+                                    placeholder="Enter your subject"
+                                    class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2 input-focus"
                                 />
                             </div>
                             <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
+                                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
                                 <textarea
                                     id="message"
                                     name="message"
-                                    required
                                     rows="4"
+                                    required
                                     placeholder="Enter your message"
-                                    class="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2"
+                                    class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2 input-focus"
                                 ></textarea>
                             </div>
-                        </div>
-
-                        <div class="flex justify-end">
-                            <button type="submit"
-                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
-                                Send Message
-                            </button>
-                        </div>
-                    </form>
+                            <div class="flex justify-end">
+                                <button
+                                    type="submit"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 btn-hover"
+                                >
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="includes/theme.js"></script>
     <script>
         // Theme toggle functionality
-        const html = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
         
-        // Check for saved theme preference or use system preference
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-        } else {
-            html.classList.remove('dark');
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
         }
+        
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeIcon.classList.toggle('fa-moon');
+            themeIcon.classList.toggle('fa-sun');
+        });
     </script>
 </body>
 </html> 

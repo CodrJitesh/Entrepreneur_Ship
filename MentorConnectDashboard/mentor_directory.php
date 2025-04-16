@@ -46,41 +46,57 @@ $stmt->close();
         }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="includes/animations.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 dark:bg-dark-100 dark:text-white">
+<body class="bg-gray-100 dark:bg-dark-100 dark:text-white min-h-screen">
     <div class="flex h-screen">
         <?php include 'components/navbar.php'; ?>
 
         <!-- Main Content -->
         <div class="flex-1 overflow-auto">
-            <div class="p-8">
+            <!-- Theme Toggle -->
+            <div class="flex justify-end mb-4">
+                <button id="theme-toggle" class="p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+            <div class="p-8 animate-fade-in">
                 <div class="max-w-7xl mx-auto">
-                    <!-- Theme Toggle -->
-                    <div class="flex justify-end mb-4">
-                        <button id="theme-toggle" class="p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg">
-                            <i class="fas fa-moon"></i>
-                        </button>
+                    <!-- Header -->
+                    <div class="mb-8 animate-slide-in">
+                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Find Your Mentor</h1>
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">Connect with experienced mentors in your field</p>
                     </div>
 
-                    <!-- Search and Filter Section -->
-                    <div class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-6 mb-8">
-                        <div class="flex flex-col md:flex-row gap-4">
-                            <div class="flex-1">
-                                <input type="text" id="search-input" placeholder="Search mentors..." 
-                                       class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-orange-500 focus:border-orange-500 dark:bg-dark-300">
+                    <!-- Search and Filter -->
+                    <div class="bg-white dark:bg-dark-200 rounded-xl shadow-md p-6 mb-8 card-hover animate-scale-in">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="search" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search Mentors</label>
+                                <div class="relative">
+                                    <input
+                                        type="text"
+                                        id="search"
+                                        placeholder="Search by name or expertise"
+                                        class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2 input-focus"
+                                    />
+                                    <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <i class="fas fa-search text-gray-400"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="w-full md:w-64">
-                                <select id="industry-filter" 
-                                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-orange-500 focus:border-orange-500 dark:bg-dark-300">
+                            <div>
+                                <label for="industry" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Filter by Industry</label>
+                                <select
+                                    id="industry"
+                                    class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-300 text-gray-900 dark:text-white shadow-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-400 focus:outline-none transition duration-150 ease-in-out px-4 py-2 input-focus"
+                                >
                                     <option value="">All Industries</option>
-                                    <?php
-                                    $industries = array_unique(array_column($mentors, 'industry'));
-                                    foreach ($industries as $industry):
-                                    ?>
-                                        <option value="<?php echo htmlspecialchars($industry); ?>">
-                                            <?php echo htmlspecialchars($industry); ?>
-                                        </option>
-                                    <?php endforeach; ?>
+                                    <option value="Technology">Technology</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Design">Design</option>
                                 </select>
                             </div>
                         </div>
@@ -89,35 +105,38 @@ $stmt->close();
                     <!-- Mentors Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <?php foreach ($mentors as $mentor): ?>
-                            <div class="bg-white dark:bg-dark-200 rounded-lg shadow-md p-6 mentor-card" 
-                                 data-name="<?php echo htmlspecialchars($mentor['full_name']); ?>"
-                                 data-industry="<?php echo htmlspecialchars($mentor['industry']); ?>">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
-                                        <span class="text-2xl font-bold text-orange-600">
-                                            <?php echo strtoupper(substr($mentor['full_name'], 0, 1)); ?>
+                            <div class="bg-white dark:bg-dark-200 rounded-xl shadow-md overflow-hidden card-hover animate-scale-in">
+                                <div class="p-6">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
+                                            <span class="text-2xl font-bold text-orange-600 dark:text-white">
+                                                <?php echo strtoupper(substr($mentor['full_name'], 0, 1)); ?>
+                                            </span>
+                                        </div>
+                                        <div class="ml-4">
+                                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white"><?php echo htmlspecialchars($mentor['full_name']); ?></h3>
+                                            <p class="text-orange-600 dark:text-orange-400"><?php echo htmlspecialchars($mentor['headline']); ?></p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400 mb-4"><?php echo htmlspecialchars($mentor['bio']); ?></p>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="px-3 py-1 bg-gray-100 dark:bg-dark-300 text-gray-800 dark:text-gray-200 rounded-full text-sm">
+                                            <?php echo htmlspecialchars($mentor['industry']); ?>
                                         </span>
+                                        <?php 
+                                        if (isset($mentor['skills_or_needs']) && !empty($mentor['skills_or_needs'])) {
+                                            $skills = explode(',', $mentor['skills_or_needs']);
+                                            foreach ($skills as $skill): 
+                                        ?>
+                                            <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 rounded-full text-sm">
+                                                <?php echo htmlspecialchars(trim($skill)); ?>
+                                            </span>
+                                        <?php 
+                                            endforeach;
+                                        }
+                                        ?>
                                     </div>
-                                    <div class="ml-4">
-                                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
-                                            <?php echo htmlspecialchars($mentor['full_name']); ?>
-                                        </h3>
-                                        <p class="text-orange-600">
-                                            <?php echo htmlspecialchars($mentor['headline']); ?>
-                                        </p>
-                                    </div>
-                                </div>
-                                <p class="text-gray-600 dark:text-gray-400 mb-4">
-                                    <?php echo htmlspecialchars($mentor['bio']); ?>
-                                </p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="inline-block bg-gray-100 dark:bg-dark-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-300">
-                                        <?php echo htmlspecialchars($mentor['industry']); ?>
-                                    </span>
-                                </div>
-                                <div class="flex justify-end">
-                                    <a href="view_profile.php?id=<?php echo $mentor['user_id']; ?>" 
-                                       class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                                    <a href="mentor_profile.php?id=<?php echo $mentor['user_id']; ?>" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 btn-hover">
                                         View Profile
                                     </a>
                                 </div>
@@ -149,27 +168,8 @@ $stmt->close();
             themeIcon.classList.toggle('fa-sun');
         });
 
-        // Search and filter functionality
-        const searchInput = document.getElementById('search-input');
-        const industryFilter = document.getElementById('industry-filter');
-        const mentorCards = document.querySelectorAll('.mentor-card');
-
-        function filterMentors() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const industryTerm = industryFilter.value.toLowerCase();
-
-            mentorCards.forEach(card => {
-                const name = card.dataset.name.toLowerCase();
-                const industry = card.dataset.industry.toLowerCase();
-                const matchesSearch = name.includes(searchTerm);
-                const matchesIndustry = !industryTerm || industry === industryTerm;
-
-                card.style.display = matchesSearch && matchesIndustry ? 'block' : 'none';
-            });
-        }
-
-        searchInput.addEventListener('input', filterMentors);
-        industryFilter.addEventListener('change', filterMentors);
+        // Add smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
     </script>
 </body>
 </html> 
